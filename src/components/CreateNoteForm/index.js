@@ -1,5 +1,6 @@
 import React from 'react';
 import sanitizeHtml from 'sanitize-html';
+import uuidv4 from 'uuid/v4';
 
 import { Container, Forms, FormFake, ButtonGroup, Button, TitleFormStyle, TextFormStyle, TrashIcon } from './styles';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +34,7 @@ class CreateNoteForm extends React.Component {
       this.props.onSave(
         sanitizeHtml(title), 
         sanitizeHtml(text),
+        uuidv4(),
       );
     };
     
