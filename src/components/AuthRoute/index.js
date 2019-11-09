@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from '@reach/router';
 import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 
 const ME = gql`
 {
