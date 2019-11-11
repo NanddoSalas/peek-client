@@ -1,5 +1,5 @@
 import React from 'react';
-import GlobalStyles from './GlobalStyles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { Router } from '@reach/router';
 
 import { Header } from './components/Header/index';
@@ -12,8 +12,8 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <GlobalStyles />
-        <Header/>
+        <CssBaseline />
+        <Header />
         <Router>
           <AuthRoute path="/" component={Main} />
           <LoginForm path="login" />
