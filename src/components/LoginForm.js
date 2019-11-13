@@ -14,8 +14,7 @@ function LoginForm() {
 
   const handleSubmit = async (values, { setErrors }) => {
     try {
-      const res = await login({ variables: values });
-      console.log(res)
+      await login({ variables: values });
     } catch (err) {
       setErrors({
         password: 'Invalid Credentials',
