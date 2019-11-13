@@ -13,13 +13,13 @@ const ME = gql`
 
 function AuthRoute(props) {
   const { component: Component } = props;
-  const { loading, data } = useQuery(ME);
+  const { loading, data } = useQuery(ME, { fetchPolicy: 'no-cache' });
 
   if (loading) return null
 
-  if (!data) return <Redirect from="/" to="login" />
+  if (!data) return <Redirect from="/" to="login" noThrow />
 
-  if (!data.me) return <Redirect from="/" to="login" />
+  if (!data.me) return <Redirect from="/" to="login" noThrow />
 
   return <Component />
 }
