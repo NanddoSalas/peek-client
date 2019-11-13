@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { logout } from '../utilities';
+import { navigate } from '@reach/router';
 import { useQuery } from '@apollo/react-hooks';
+import { useLogout } from '../hooks';
 import { USERNAME } from '../graphql/querys';
 
 import { faStickyNote } from '@fortawesome/free-solid-svg-icons';
 import { AccountCircle } from '@material-ui/icons';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Logo = styled.div`
   font-size: 32px;
@@ -24,14 +25,16 @@ const TextLogo = styled.span`
 
 function Appbar() {
   const { loading, data } = useQuery(USERNAME);
+  const logout = useLogout();
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleOpenMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleOpenMenu = event => setAnchorEl(event.currentTarget);
 
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
+  const handleCloseMenu = () => setAnchorEl(null);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
   };
 
   return (
@@ -64,7 +67,7 @@ function Appbar() {
           open={Boolean(anchorEl)}
           onClose={handleCloseMenu}
         >
-          <MenuItem onClick={logout}>Sign Out</MenuItem>
+          <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
         </Menu>
 
       </Toolbar>
