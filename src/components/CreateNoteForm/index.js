@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { CREATENOTE } from '../../graphql/mutations';
 import sanitizeHtml from 'sanitize-html';
-import uuidv4 from 'uuid/v4';
 
 import { Container, Forms, FormFake, ButtonGroup, Button, TitleFormStyle, TextFormStyle, TrashIcon } from './styles';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -8,85 +9,83 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ContentEditable from "react-contenteditable";
 
+function CreateNoteForm() {
+  const emptyNote = { title: '', text: '' };
+  const [{ title, text }, setNote] = useState(emptyNote);
+  const [createNote] = useMutation(CREATENOTE);
 
-class CreateNoteForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      text: '',
-    };
+  const handleChangeTitle = ({ target }) => {
+    setNote((currentNote) => ({
+      ...currentNote,
+      title: target.value,
+    }));
   };
 
-  handleChangeTitle = ({ target }) => this.setState({ title: target.value });
+  const handleChangeText = ({ target }) => {
+    setNote((currentNote) => ({
+      ...currentNote,
+      text: target.value,
+    }));
+  };
 
-  handleChangeText = ({ target }) => this.setState({ text: target.value });
-
-  handleTrashClick = () => this.setState({
-    title: '',
-    text: '',
-  });
-
-  handleSaveClick = () => {
-    const { title, text } = this.state;
-
+  const handleSaveClick = async () => {
     if (title || text) {
-      this.props.onSave(
-        sanitizeHtml(title), 
-        sanitizeHtml(text),
-        uuidv4(),
-      );
-    };
-    
-    this.setState({
-      title: '',
-      text: '',
-    });
-  }
+      const note = {
+        title: sanitizeHtml(title),
+        text: sanitizeHtml(text),
+      };
 
-  render() {
-    return (
-      <Container>
-        <Forms>
-          <FormFake
-            show={this.state.title}
-            size="16px"
-          >Title</FormFake>
-          <ContentEditable
-            style={TitleFormStyle}
-            html={this.state.title}
-            onChange={this.handleChangeTitle}
-          />
+      createNote({
+        variables: note,
+      });
 
-          <FormFake
-            show={this.state.text}
-            size="14px"
-          >Create note...</FormFake>
-          <ContentEditable
-            style={TextFormStyle}
-            html={this.state.text}
-            onChange={this.handleChangeText}
-          />
-        </Forms>
+      setNote(emptyNote);
+    }
+  };
 
-        <ButtonGroup hide={this.state.show}>
+  return (
+    <Container>
+      <Forms>
 
-          <TrashIcon
-            onClick={this.handleTrashClick}
-            isActive={this.state.title || this.state.text}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </TrashIcon>
+        <FormFake
+          show={title}
+          size="16px"
+        >Title</FormFake>
+        <ContentEditable
+          style={TitleFormStyle}
+          html={title}
+          onChange={handleChangeTitle}
+        />
 
-          <Button
-            isActive={this.state.title || this.state.text}
-            onClick={this.handleSaveClick}
-          >Save</Button>
-          
-        </ButtonGroup>
-      </Container>
-    );
-  }
+        <FormFake
+          show={text}
+          size="14px"
+        >Create note...</FormFake>
+        <ContentEditable
+          style={TextFormStyle}
+          html={text}
+          onChange={handleChangeText}
+        />
+      </Forms>
+
+      <ButtonGroup>
+
+        <TrashIcon
+          onClick={() => setNote(emptyNote)}
+          isActive={title || text}
+        >
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </TrashIcon>
+
+        <Button
+          isActive={title || text}
+          onClick={handleSaveClick}
+        >Save</Button>
+
+      </ButtonGroup>
+
+    </Container>
+  );
 }
 
 export { CreateNoteForm };

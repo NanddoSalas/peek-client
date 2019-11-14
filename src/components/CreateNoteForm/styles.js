@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   color: rgb(232, 234, 237);
-  background-color: #2D2E30;
-  border: 1px solid #5f6368;
+  background-color: white;
   border-radius: 8px;
-  box-shadow:rgba(0, 0, 0, 0.6) 0px 1px 2px 0px, rgba(0, 0, 0, 0.3) 0px 2px 6px 2px;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149);
 `;
 
 const Forms = styled.div`
@@ -44,15 +43,15 @@ const ButtonGroup = styled.div`
   align-items: center;
 `;
 
-const Button= styled.div`
+const Button = styled.div`
   padding: 8px 24px;
   user-select: none;
 
-  color: ${(props) => props.isActive ? "white" : "rgb(128, 134, 139)"};
+  color: ${(props) => props.isActive ? "black" : "rgb(128, 134, 139)"};
 
   ${this}:hover {
-    cursor: ${(props) => props.isActive ? "pointer" :  "auto"};
-    background-color: ${(props) => props.isActive ? "rgba(154,160,166,0.039)" :  "none"};
+    cursor: ${(props) => props.isActive ? "pointer" : "auto"};
+    background-color: ${(props) => props.isActive ? "rgba(154,160,166,0.039)" : "none"};
   }
 `;
 
@@ -60,6 +59,7 @@ const FormStyle = {
   padding: "12px 16px",
   position: "relative",
   outline: "none",
+  color: "black",
 };
 
 const TitleFormStyle = {
@@ -75,11 +75,11 @@ const TextFormStyle = {
 
 const TrashIcon = styled.div`
   padding: 8px 24px;
-  color: ${(props) => props.isActive ? "white" : "rgb(128, 134, 139)"};
+  color: ${(props) => props.isActive ? "black" : "rgb(128, 134, 139)"};
 
   ${this}:hover {
-    cursor: ${(props) => props.isActive ? "pointer" :  "auto"};
-    background-color: ${(props) => props.isActive ? "rgba(154,160,166,0.039)" :  "none"};
+    cursor: ${(props) => props.isActive ? "pointer" : "auto"};
+    background-color: ${(props) => props.isActive ? "rgba(154,160,166,0.039)" : "none"};
   }
 `;
 
