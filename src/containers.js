@@ -13,4 +13,12 @@ const FormPaper = styled(Paper)`
   padding: 0px 16px 16px 16px;
 `;
 
-export { FormContainer, FormPaper };
+const CreateNoteFormContainer = styled.div`
+  margin: 16px 8px;
+  @media screen and (min-width: 600px) {
+    margin: 32px auto 16px auto;
+    width: 580px;
+  };
+`;
+
+export { FormContainer, FormPaper, CreateNoteFormContainer };
