@@ -6,4 +6,14 @@ mutation Logout {
 }
 `;
 
-export { LOGOUT };
+const CREATENOTE = gql`
+mutation CreateNote($title: String, $text: String) {
+  createNote(title: $title, text: $text) {
+    id
+    title
+    text
+  }
+}
+`;
+
+export { LOGOUT, CREATENOTE };
