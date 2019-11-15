@@ -8,4 +8,14 @@ query Username {
 }
 `;
 
-export { USERNAME };
+const GETNOTES = gql`
+query GetNotes {
+  notes: getNotes {
+    id
+    title
+    text
+  }
+}
+`;
+
+export { USERNAME, GETNOTES };
