@@ -9,10 +9,10 @@ function NoteList() {
   const { data } = useQuery(GETNOTES);
   return (
     <Masonry>
-      {data ? data.notes.map(({ title, text, id }) => (
+      {data ? data.notes.map((note) => (
         <Note
-          data={{ title, text }}
-          key={id}
+          note={note}
+          key={note.id}
         />
       )) : null}
     </Masonry>
