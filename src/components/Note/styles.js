@@ -3,10 +3,12 @@ import styled from 'styled-components';
 const Card = styled.div`
   margin: 8px;
   width: 240px;
-  color: rgb(232, 234, 237);
-  background-color: #2D2E30;
-  border: 1px solid #5f6368;
+  background-color: white;
+  border: 1px solid darkgray;
   border-radius: 8px;
+  @media screen and (max-width: 542px) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.div`
