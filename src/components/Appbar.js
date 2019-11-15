@@ -32,8 +32,8 @@ function Appbar() {
 
   const handleCloseMenu = () => setAnchorEl(null);
 
-  const handleLogout = async () => {
-    await logout();
+  const handleLogout = () => {
+    logout();
     navigate("/login");
   };
 
