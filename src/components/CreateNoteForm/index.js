@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATENOTE } from '../../graphql/mutations';
+import { GETNOTES } from '../../graphql/querys';
 import sanitizeHtml from 'sanitize-html';
 
 import { Container, Forms, FormFake, ButtonGroup, Button, TitleFormStyle, TextFormStyle, TrashIcon } from './styles';
@@ -12,7 +13,16 @@ import ContentEditable from "react-contenteditable";
 function CreateNoteForm() {
   const emptyNote = { title: '', text: '' };
   const [{ title, text }, setNote] = useState(emptyNote);
-  const [createNote] = useMutation(CREATENOTE);
+  const [createNote] = useMutation(CREATENOTE, {
+    update: (cache, { data: { createNote } }) => {
+      const { notes } = cache.readQuery({ query: GETNOTES });
+
+      cache.writeQuery({
+        query: GETNOTES,
+        data: { notes: [createNote].concat(notes) },
+      });
+    },
+  });
 
   const handleChangeTitle = ({ target }) => {
     setNote((currentNote) => ({
