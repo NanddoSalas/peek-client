@@ -22,10 +22,10 @@
     "react": "^16.11.0",
     "react-contenteditable": "^3.3.2",
     "react-dom": "^16.11.0",
+    "react-masonry-component": "^6.2.1",
     "react-scripts": "3.2.0",
     "sanitize-html": "^1.20.1",
     "styled-components": "^4.4.1",
-    "uuid": "^3.3.3",
     "yup": "^0.27.0"
   },
   "scripts": {
