@@ -21,4 +21,25 @@ const CreateNoteFormContainer = styled.div`
   };
 `;
 
-export { FormContainer, FormPaper, CreateNoteFormContainer };
+const NotesContainer = styled.div`
+  width: 100%;
+  margin: 16px auto 0 auto;
+  padding: 8px;
+  @media screen and (min-width: 543px) {
+    width: 528px;
+  }
+  @media screen and (min-width: 960px) {
+    width: 784px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 1040px;
+  }
+  @media screen and (min-width: 1640px) {
+    width: 1296px;
+  }
+  @media screen and (min-width: 1896px) {
+    width: 1552px;
+  }
+`;
+
+export { FormContainer, FormPaper, CreateNoteFormContainer, NotesContainer };
