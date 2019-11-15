@@ -1,24 +1,51 @@
 import React from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { DELETENOTE } from '../../graphql/mutations';
+import { GETNOTES } from '../../graphql/querys';
 import sanitizeHtml from 'sanitize-html';
-import { Card, Title, Text } from './styles';
+import CloseIcon from '@material-ui/icons/Close';
+import { Card, Title, Text, IconButton } from './styles';
 
-function Note({ data }) {
-  const title = { 
-    __html: sanitizeHtml(data.title)
+function Note({ note }) {
+  const [deleteNote] = useMutation(DELETENOTE);
+
+  const handleDelete = () => {
+    deleteNote({
+      variables: {
+        id: note.id,
+      },
+      update: (cache, { data: { deleteNote } }) => {
+        const { notes } = cache.readQuery({ query: GETNOTES });
+
+        cache.writeQuery({
+          query: GETNOTES,
+          data: {
+            notes: notes.filter((n) => n.id !== deleteNote.id)
+          },
+        });
+      }
+    });
   };
 
-  const text = { 
-    __html: sanitizeHtml(data.text)
+  const title = {
+    __html: sanitizeHtml(note.title)
+  };
+
+  const text = {
+    __html: sanitizeHtml(note.text)
   };
 
   return (
     <Card>
-      {data.title && (
+      {note.title && (
         <Title dangerouslySetInnerHTML={title} />
       )}
-      {data.text && (
+      {note.text && (
         <Text dangerouslySetInnerHTML={text} />
       )}
+      <IconButton onClick={handleDelete}>
+        <CloseIcon />
+      </IconButton>
     </Card>
   );
 };
