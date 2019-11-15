@@ -7,7 +7,6 @@ import { Note } from './Note';
 
 function NoteList() {
   const { data } = useQuery(GETNOTES);
-  console.log(data);
   return (
     <Masonry>
       {data ? data.notes.map(({ title, text, id }) => (
