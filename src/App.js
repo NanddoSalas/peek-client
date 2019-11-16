@@ -5,8 +5,8 @@ import { Router } from '@reach/router';
 import { LogIn } from './pages/LogIn';
 import { SignUp } from './pages/SignUp';
 
-import { AuthRoute } from './components/AuthRoute/index';
-import { Main } from './components/Main/index';
+import { AuthRoute } from './components/AuthRoute';
+import { Main } from './components/Main';
 
 class App extends React.Component {
   render() {

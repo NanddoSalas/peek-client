@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { CreateNoteFormContainer, NotesContainer } from '../../containers';
+import { CreateNoteFormContainer, NotesContainer } from '../containers';
 
-import { Appbar } from '../Appbar';
-import { CreateNoteForm } from '../CreateNoteForm';
-import { NoteList } from '../NoteList';
+import { Appbar } from './Appbar';
+import { CreateNoteForm } from './CreateNoteForm';
+import { NoteList } from './NoteList';
 
 function Main() {
   return (
