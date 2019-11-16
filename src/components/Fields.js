@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getIn } from 'formik';
 import { TextField } from '@material-ui/core';
 
@@ -13,5 +14,11 @@ const TextFormField = ({ field, form, error, ...props }) => {
     />
   );
 }
+
+TextFormField.propTypes = {
+  field: PropTypes.any,
+  form: PropTypes.any,
+  error: PropTypes.bool,
+};
 
 export { TextFormField };

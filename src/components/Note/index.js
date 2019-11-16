@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import { DELETENOTE } from '../../graphql/mutations';
 import { GETNOTES } from '../../graphql/querys';
@@ -48,6 +49,14 @@ function Note({ note }) {
       </IconButton>
     </Card>
   );
+}
+
+Note.propTypes = {
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    text: PropTypes.string,
+  }),
 };
 
 export { Note };

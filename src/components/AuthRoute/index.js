@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from '@reach/router';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -23,5 +24,9 @@ function AuthRoute(props) {
 
   return <Component />
 }
+
+AuthRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+};
 
 export { AuthRoute };
