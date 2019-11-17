@@ -4,7 +4,7 @@ import { CREATENOTE } from '../../graphql/mutations';
 import { GETNOTES } from '../../graphql/querys';
 import sanitizeHtml from 'sanitize-html';
 
-import { Container, Forms, FormFake, ButtonGroup, Button, TitleFormStyle, TextFormStyle, TrashIcon } from './styles';
+import { Container, Forms, FormFake, ButtonGroup, Button, TitleFormStyle, TextFormStyle, TrashIcon } from '../BaseNoteForm';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
