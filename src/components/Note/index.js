@@ -7,7 +7,7 @@ import sanitizeHtml from 'sanitize-html';
 import CloseIcon from '@material-ui/icons/Close';
 import { Card, Title, Text, IconButton } from './styles';
 
-function Note({ note }) {
+function Note({ note, onEdit }) {
   const [deleteNote] = useMutation(DELETENOTE);
 
   const handleDelete = () => {
@@ -28,6 +28,8 @@ function Note({ note }) {
     });
   };
 
+  const handleEditMode = () => onEdit(note);
+
   const title = {
     __html: sanitizeHtml(note.title)
   };
@@ -39,10 +41,10 @@ function Note({ note }) {
   return (
     <Card>
       {note.title && (
-        <Title dangerouslySetInnerHTML={title} />
+        <Title onClick={handleEditMode} dangerouslySetInnerHTML={title} />
       )}
       {note.text && (
-        <Text dangerouslySetInnerHTML={text} />
+        <Text onClick={handleEditMode} dangerouslySetInnerHTML={text} />
       )}
       <IconButton onClick={handleDelete}>
         <CloseIcon />
@@ -57,6 +59,7 @@ Note.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
   }),
+  onEdit: PropTypes.func,
 };
 
 export { Note };
