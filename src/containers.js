@@ -42,4 +42,14 @@ const NotesContainer = styled.div`
   }
 `;
 
-export { FormContainer, FormPaper, CreateNoteFormContainer, NotesContainer };
+const NoteEditModalContainer = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 25%;
+  @media screen and (min-width: 600px) {
+    width: 580px;
+    left: calc( (100vw - 580px) / 2 );
+  };
+`;
+
+export { FormContainer, FormPaper, CreateNoteFormContainer, NotesContainer, NoteEditModalContainer };
