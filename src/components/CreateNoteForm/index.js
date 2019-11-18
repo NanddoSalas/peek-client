@@ -16,11 +16,15 @@ function CreateNoteForm() {
   const [createNote] = useMutation(CREATENOTE, {
     update: (cache, { data: { createNote } }) => {
       const { notes } = cache.readQuery({ query: GETNOTES });
+      const repeated = notes.filter((note) => note.id === createNote.id);
 
-      cache.writeQuery({
-        query: GETNOTES,
-        data: { notes: [createNote].concat(notes) },
-      });
+      if (!repeated) {
+        cache.writeQuery({
+          query: GETNOTES,
+          data: { notes: [createNote].concat(notes) },
+        });
+      }
+
     },
   });
 
