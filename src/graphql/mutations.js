@@ -24,4 +24,14 @@ mutation DeleteNote($id: ID!) {
 }
 `;
 
-export { LOGOUT, CREATENOTE, DELETENOTE };
+const UPDATENOTE = gql`
+mutation UpdateNote($id: ID!, $title: String!, $text: String!) {
+  updatedNote: updateNote(id: $id, title: $title, text: $text) {
+    id
+    title
+    text
+  }
+}
+`;
+
+export { LOGOUT, CREATENOTE, DELETENOTE, UPDATENOTE };
