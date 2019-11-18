@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GETNOTES } from '../graphql/querys';
-import { NOTES_SUBSCRIPTION } from '../graphql/subscriptions';
+import { NOTES_SUBSCRIPTION, NOTE_UPDATED, NOTE_DELETED } from '../graphql/subscriptions';
 import { useUpdateNote } from '../hooks';
 import { NoteEditModalContainer } from '../containers';
 import Masonry from 'react-masonry-component';
@@ -38,6 +38,32 @@ function NoteList() {
         return Object.assign({}, prev, {
           notes: [newNote].concat(prev.notes),
         });
+      },
+    });
+
+    subscribeToMore({
+      document: NOTE_UPDATED,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const updatedNote = subscriptionData.data.noteUpdated;
+
+        const notes = prev.notes.map(
+          (note) => note.id === updatedNote.id ? updatedNote : note,
+        );
+
+        return Object.assign({}, prev, { notes });
+      },
+    });
+
+    subscribeToMore({
+      document: NOTE_DELETED,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const { id } = subscriptionData.data.noteDeleted;
+
+        const notes = prev.notes.filter((note) => note.id !== id);
+
+        return Object.assign({}, prev, { notes });
       },
     });
   }, [subscribeToMore]);
