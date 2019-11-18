@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { LOGOUT } from './graphql/mutations';
+import { LOGOUT, UPDATENOTE } from './graphql/mutations';
 
 const useLogout = () => {
   const [Logout, { client }] = useMutation(LOGOUT);
@@ -12,4 +13,39 @@ const useLogout = () => {
   return logout;
 }
 
-export { useLogout };
+const useUpdateNote = (initialValue) => {
+  const [currentNote, setCurrentNote] = useState(initialValue);
+  const [modifiedNote, setModifiedNote] = useState(initialValue);
+
+  const [updateNote] = useMutation(UPDATENOTE);
+
+  const setNote = (note) => {
+    setCurrentNote(note);
+    setModifiedNote(note);
+  };
+
+  const handleChange = (key, value) => {
+    setModifiedNote({
+      ...modifiedNote,
+      [key]: value,
+    });
+  };
+
+  const performUpdate = async () => {
+    if (currentNote.title !== modifiedNote.title || currentNote.text !== modifiedNote.text) {
+      await updateNote({
+        variables: modifiedNote,
+      });
+    }
+  }
+
+  return {
+    currentNote,
+    modifiedNote,
+    setNote,
+    handleChange,
+    performUpdate,
+  };
+};
+
+export { useLogout, useUpdateNote };
