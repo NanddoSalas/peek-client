@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { getMainDefinition } from 'apollo-utilities';
@@ -6,14 +7,14 @@ import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:4000/subscriptions',
+  uri: process.env.REACT_APP_SUBSCRIPTIONS_URL || 'ws://localhost:4000/',
   options: {
     reconnect: true,
   },
 });
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/',
+  uri: process.env.REACT_APP_API_URL || 'http://localhost:4000/',
   credentials: 'include',
 });
 
