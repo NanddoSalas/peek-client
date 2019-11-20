@@ -7,7 +7,7 @@ import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 
 const wsLink = new WebSocketLink({
-  uri: process.env.REACT_APP_SUBSCRIPTIONS_URL || 'ws://localhost:4000/',
+  uri: process.env.REACT_APP_SUBSCRIPTIONS_URL || 'ws://localhost:4000/subscriptions',
   options: {
     reconnect: true,
   },
