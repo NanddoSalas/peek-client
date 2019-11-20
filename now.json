@@ -1,0 +1,10 @@
+{
+  "name": "peek-client",
+  "version": 2,
+  "build": {
+    "env": {
+      "REACT_APP_SUBSCRIPTIONS_URL": "@peek_subscriptions_url",
+      "REACT_APP_API_URL": "@peek_api_url"
+    }
+  }
+}
