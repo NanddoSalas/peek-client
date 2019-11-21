@@ -1,6 +1,9 @@
 {
   "name": "peek-client",
   "version": 2,
+  "github": {
+    "autoAlias": false
+  },
   "build": {
     "env": {
       "REACT_APP_SUBSCRIPTIONS_URL": "@peek_subscriptions_url",
