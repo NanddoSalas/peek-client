@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import { Link, Redirect } from '@reach/router';
 import { useMutation } from '@apollo/react-hooks';
-import { signupSchema, SIGNUP } from '../graphql/signup'
+import { signupSchema, SIGNUP } from '../graphql/signup';
 import { getErrors } from '../utilities';
 
-import { Button, FormControl } from '@material-ui/core';
-import { Formik, Form, Field } from "formik";
+import { Button, FormControl, Typography } from '@material-ui/core';
+import { Formik, Form, Field } from 'formik';
 import { TextFormField } from './Fields';
 import { FormPaper } from '../containers';
 import { Divider } from './utils';
@@ -20,19 +20,27 @@ function SignupForm() {
       const errors = getErrors(response);
       setErrors(errors);
     }
-  }
+  };
 
-  if (!error && data) return <Redirect from="/signup" to="/login" noThrow />
+  if (!error && data) return <Redirect from="/signup" to="/login" noThrow />;
 
   return (
     <FormPaper>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          paddingTop: '16px',
+        }}
+      >
+        <Typography variant="h3">Signup</Typography>
+      </div>
       <Formik
         initialValues={{ username: '', password: '', password2: '' }}
         validationSchema={signupSchema}
         onSubmit={handleSubmit}
       >
         <Form>
-
           <FormControl fullWidth margin="normal">
             <Field
               name="username"
@@ -71,22 +79,26 @@ function SignupForm() {
               color="primary"
               type="submit"
               disabled={!!loading}
-            >signup</Button>
+            >
+              signup
+            </Button>
           </FormControl>
 
           <Divider />
 
           <FormControl fullWidth margin="normal">
+            <Typography variant="h6" style={{ textAlign: 'center' }}>
+              Already have an account?
+            </Typography>
             <Link to="/login" style={{ textDecoration: 'none' }}>
               <Button variant="contained" style={{ width: '100%' }}>
                 login
               </Button>
             </Link>
           </FormControl>
-
         </Form>
       </Formik>
-    </FormPaper >
+    </FormPaper>
   );
 }
 
