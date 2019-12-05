@@ -1,21 +1,21 @@
 import gql from 'graphql-tag';
 
-const USERNAME = gql`
-query Username {
-  me {
-    username
+const NAME = gql`
+  query Name {
+    me {
+      name
+    }
   }
-}
 `;
 
 const GETNOTES = gql`
-query GetNotes {
-  notes: getNotes {
-    id
-    title
-    text
+  query GetNotes {
+    notes: getNotes {
+      id
+      title
+      text
+    }
   }
-}
 `;
 
-export { USERNAME, GETNOTES };
+export { GETNOTES, NAME };
