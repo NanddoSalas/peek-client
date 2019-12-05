@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
+import { wsLink } from '../apollo';
 import styled from 'styled-components';
 import { navigate } from '@reach/router';
 import { useQuery } from '@apollo/react-hooks';
 import { useLogout } from '../hooks';
-import { USERNAME } from '../graphql/querys';
+import { NAME } from '../graphql/querys';
 
 import { faStickyNote } from '@fortawesome/free-solid-svg-icons';
 import { AccountCircle } from '@material-ui/icons';
 
-import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Logo = styled.div`
@@ -24,41 +32,33 @@ const TextLogo = styled.span`
 `;
 
 function Appbar() {
-  const { loading, data } = useQuery(USERNAME);
+  const { loading, data } = useQuery(NAME);
   const logout = useLogout();
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleOpenMenu = event => setAnchorEl(event.currentTarget);
+  const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
 
   const handleCloseMenu = () => setAnchorEl(null);
 
   const handleLogout = () => {
+    wsLink.subscriptionClient.close();
     logout();
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
     <AppBar color="primary" position="static">
       <Toolbar>
-
         <Logo>
           <FontAwesomeIcon icon={faStickyNote} />
           <TextLogo>Peek</TextLogo>
         </Logo>
 
-        <Typography
-          variant="h6"
-          style={{ marginLeft: 'auto' }}
-        >
-          {!loading && data ? (
-            data.me.username
-          ) : null}
+        <Typography variant="h6" style={{ marginLeft: 'auto' }}>
+          {!loading && data ? data.me.name : null}
         </Typography>
 
-        <IconButton
-          color="inherit"
-          onClick={handleOpenMenu}
-        >
+        <IconButton color="inherit" onClick={handleOpenMenu}>
           <AccountCircle />
         </IconButton>
 
@@ -69,9 +69,8 @@ function Appbar() {
         >
           <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
         </Menu>
-
       </Toolbar>
-    </AppBar >
+    </AppBar>
   );
 }
 
