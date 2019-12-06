@@ -11,7 +11,7 @@ export const wsLink = new WebSocketLink({
     process.env.REACT_APP_SUBSCRIPTIONS_URL ||
     'ws://localhost:4000/subscriptions',
   options: {
-    reconnect: false,
+    reconnect: true,
   },
 });
 
