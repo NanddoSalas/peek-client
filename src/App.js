@@ -1,12 +1,9 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Router } from '@reach/router';
-
-import { LogIn } from './pages/LogIn';
-import { SignUp } from './pages/SignUp';
-
 import { AuthRoute } from './components/AuthRoute';
 import { Main } from './components/Main';
+import { Router } from '@reach/router';
+import { Login } from './pages/Login';
 
 class App extends React.Component {
   render() {
@@ -15,8 +12,7 @@ class App extends React.Component {
         <CssBaseline />
         <Router>
           <AuthRoute path="/" component={Main} />
-          <LogIn path="login" />
-          <SignUp path="signup" />
+          <Login path="/login" />
         </Router>
       </React.Fragment>
     );
