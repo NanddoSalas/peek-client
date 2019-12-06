@@ -6,6 +6,7 @@
   },
   "build": {
     "env": {
+      "REACT_APP_GOOGLE_CLIENT_ID": "@peek_google_client_id",
       "REACT_APP_SUBSCRIPTIONS_URL": "@peek_subscriptions_url",
       "REACT_APP_API_URL": "@peek_api_url"
     }
