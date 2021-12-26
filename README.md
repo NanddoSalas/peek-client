@@ -2,7 +2,7 @@
 
 Web Application that allows you create, read, update and delete simple notes (just Title and note Body).
 
-[Try Demo](https://peek.nanddosalas.com)
+[Try Demo](https://peek-notes.netlify.app)
 
 ## Preview
 
